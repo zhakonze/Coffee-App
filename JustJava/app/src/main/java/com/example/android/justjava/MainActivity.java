@@ -22,7 +22,7 @@ import java.util.Locale;
  */
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 1;
+    long  quantity = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the - button is clicked.
      */
     public void decrement(View view){
-//        int quantity = 2;
-
-        quantity = quantity - 1;
-        displayQuantity(quantity);
+        if (quantity - 1 > 0) {
+            quantity = quantity - 1;
+            displayQuantity(quantity);
+        }
     }
 
 
@@ -52,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = calculatePrice();
+        long price = calculatePrice();
+        String msg;
         createOrderSummary(price);
-//        String priceMessage = "Total : $" + price;
-//        priceMessage = priceMessage + "\n" + "Thank you!";
-        String msg = createOrderSummary(price);
+        if (price > 0)
+            msg = createOrderSummary(price);
+        else
+            msg = createErrorMsg();
         displayMessage(msg);
 
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void displayQuantity(int number) {
+    private void displayQuantity(long number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
@@ -87,11 +89,21 @@ public class MainActivity extends AppCompatActivity {
 //        priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
 //    }
 
-    private int calculatePrice() {
+    private long calculatePrice() {
         return (quantity * 5);
     }
 
-    private String createOrderSummary(int num) {
+    private String createErrorMsg() {
+        String _name = "Zakhele Hakonze";
+        String priceMessage = "Name: " + _name;
+        priceMessage = priceMessage + "\n" + "Please enter a valid quantity value";
+        priceMessage = priceMessage + "\n" + "to proceed with your order";
+        priceMessage = priceMessage + "\n" + "Thank you!";
+        String summary = priceMessage;
+        return summary;
+    }
+
+    private String createOrderSummary(long num) {
         String _name = "Zakhele Hakonze";
         String priceMessage = "Name: " + _name;
         priceMessage = priceMessage + "\n" + "Quantity: " + quantity;
