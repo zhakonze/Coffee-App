@@ -13,6 +13,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -54,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         long price = calculatePrice();
         String msg;
-        createOrderSummary(price);
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.Whip_checker);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.choclate_checker);
+        boolean _chocolate = chocolateCheckBox.isChecked();
+        boolean _hasWhipCream = whippedCreamCheckBox.isChecked();
         if (price > 0)
-            msg = createOrderSummary(price);
+            msg = createOrderSummary(price, _hasWhipCream, _chocolate);
         else
             msg = createErrorMsg();
         displayMessage(msg);
@@ -103,9 +107,18 @@ public class MainActivity extends AppCompatActivity {
         return summary;
     }
 
-    private String createOrderSummary(long num) {
+    private String createOrderSummary(long num, boolean _addWhipCream, boolean _addChocolate) {
+
         String _name = "Zakhele Hakonze";
         String priceMessage = "Name: " + _name;
+        if (_addWhipCream == true)
+        {
+            priceMessage = priceMessage + "\n" + "Add Whipped Cream";
+        }
+        if (_addChocolate == true)
+        {
+            priceMessage = priceMessage + "\n" + "Add Chocolate";
+        }
         priceMessage = priceMessage + "\n" + "Quantity: " + quantity;
         priceMessage = priceMessage + "\n" + "Total : $" + num;
         priceMessage = priceMessage + "\n" + "Thank you!";

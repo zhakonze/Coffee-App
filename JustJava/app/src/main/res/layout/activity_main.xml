@@ -1,82 +1,121 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp"
-        android:text="quantity"
-        android:textAllCaps="true"
-        />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="1dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:configChanges="orientation|screenSize|keyboardHidden"
         android:paddingRight="16dp"
-        android:orientation="horizontal" >
-
-
-        <Button
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:textSize="16dp"
-            android:paddingBottom="16dp"
-            android:text="-"
-            android:onClick="decrement"
-        />
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/quantity_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:text="toppings"
+            android:textAllCaps="true"
+            />
+
+        <CheckBox
+            android:id="@+id/Whip_checker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Whipped Cream"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="24dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            />
+
+        <CheckBox
+            android:id="@+id/choclate_checker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chocolate"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="24dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:text="quantity"
+            android:textAllCaps="true"
+            />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="16dp"
+            android:orientation="horizontal" >
+
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:textSize="16dp"
+                android:paddingBottom="16dp"
+                android:text="-"
+                android:onClick="decrement"
+            />
+
+            <TextView
+                android:id="@+id/quantity_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:textSize="16sp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="#000000"
+                android:text="1"
+            />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:textSize="16dp"
+                android:paddingBottom="16dp"
+                android:text="+"
+                android:onClick="increment"
+            />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:text="order summary"
+            android:textAllCaps="true"
+            />
+
+        <TextView
+            android:id="@+id/order_summary_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
             android:textSize="16sp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:textColor="#000000"
-            android:text="1"
-        />
+            android:text="$10"
+            />
 
         <Button
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:paddingBottom="16dp"
-            android:text="+"
-            android:onClick="increment"
-        />
+            android:text="oder"
+            android:onClick="submitOrder"
+             />
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp"
-        android:text="order summary"
-        android:textAllCaps="true"
-        />
-
-    <TextView
-        android:id="@+id/order_summary_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="$10"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:text="oder"
-        android:onClick="submitOrder"
-         />
-</LinearLayout>
+</ScrollView>
