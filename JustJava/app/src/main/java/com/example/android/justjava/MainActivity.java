@@ -10,11 +10,15 @@ package com.example.android.justjava;
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -34,8 +38,18 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the + button is clicked.
      */
     public void increment(View view){
-        quantity = quantity + 1;
-        displayQuantity(quantity);
+        if (quantity + 1 <= 50) {
+            quantity = quantity + 1;
+            displayQuantity(quantity);
+        }
+        else{
+            Context context = getApplicationContext();
+            CharSequence text = "Can't order more than 100 cup";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
     }
 
     /**
@@ -46,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
             quantity = quantity - 1;
             displayQuantity(quantity);
         }
+        else{
+            Context context = getApplicationContext();
+            CharSequence text = "Can't order less than 1 cup";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
     }
 
 
@@ -53,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        EditText text = (EditText)findViewById(R.id._name_me);
+        String _name = text.getText().toString();
         long price = calculatePrice();
         String msg;
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.Whip_checker);
@@ -60,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         boolean _chocolate = chocolateCheckBox.isChecked();
         boolean _hasWhipCream = whippedCreamCheckBox.isChecked();
         if (price > 0)
-            msg = createOrderSummary(price, _hasWhipCream, _chocolate);
+            msg = createOrderSummary(price, _hasWhipCream, _chocolate, _name);
         else
             msg = createErrorMsg();
         displayMessage(msg);
@@ -85,14 +109,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * This method displays the given price on the screen.
-     */
-//    private void displayPrice(int number) {
-//        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-//        priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
-//    }
-
     private long calculatePrice() {
         return (quantity * 5);
     }
@@ -107,17 +123,18 @@ public class MainActivity extends AppCompatActivity {
         return summary;
     }
 
-    private String createOrderSummary(long num, boolean _addWhipCream, boolean _addChocolate) {
+    private String createOrderSummary(long num, boolean _addWhipCream, boolean _addChocolate, String _name) {
 
-        String _name = "Zakhele Hakonze";
         String priceMessage = "Name: " + _name;
         if (_addWhipCream == true)
         {
-            priceMessage = priceMessage + "\n" + "Add Whipped Cream";
+            priceMessage = priceMessage + "\n" + "Add Whipped Cream: $2/cup";
+            num = (quantity * 2) + num;
         }
         if (_addChocolate == true)
         {
-            priceMessage = priceMessage + "\n" + "Add Chocolate";
+            priceMessage = priceMessage + "\n" + "Add Chocolate: $4/cup";
+            num = (quantity * 4) + num;;
         }
         priceMessage = priceMessage + "\n" + "Quantity: " + quantity;
         priceMessage = priceMessage + "\n" + "Total : $" + num;
