@@ -6,6 +6,7 @@
         <item name="colorPrimary">#7A5547</item>
         <item name="colorPrimaryDark">#7A5547</item>
         <item name="colorAccent">#7A5547</item>
+        <item name="colorButtonNormal">#7A5547</item>
     </style>
 
 </resources>
