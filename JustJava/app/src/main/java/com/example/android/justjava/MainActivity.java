@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             Context context = getApplicationContext();
-            CharSequence text = "Can't order more than 100 cup";
+            CharSequence text = "Can't order more than 50 cup";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -85,20 +85,38 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.choclate_checker);
         boolean _chocolate = chocolateCheckBox.isChecked();
         boolean _hasWhipCream = whippedCreamCheckBox.isChecked();
-        if (price > 0) {
-            msg = createOrderSummary(price, _hasWhipCream, _chocolate, _name);
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-            intent.putExtra(Intent.EXTRA_EMAIL, "Justjava@coffee.com");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + _name);
-            intent.putExtra(Intent.EXTRA_TEXT, msg);
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
+        if (price > 0)
+        {
+            if(_name.length() > 2)
+            {
+                msg = createOrderSummary(price, _hasWhipCream, _chocolate, _name);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                intent.putExtra(Intent.EXTRA_EMAIL, "Justjava@coffee.com");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + _name);
+                intent.putExtra(Intent.EXTRA_TEXT, msg);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                displayMessage(msg);
+            }
+            else
+            {
+                Context context = getApplicationContext();
+                CharSequence _nametext = "Fill the name field to proceed";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, _nametext, duration);
+                toast.show();
+
             }
         }
         else
+        {
             msg = createErrorMsg();
-        displayMessage(msg);
+            displayMessage(msg);
+        }
+
 
 
 
